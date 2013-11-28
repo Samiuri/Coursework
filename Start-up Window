@@ -1,0 +1,66 @@
+import sys
+from PyQt4 import QtGui
+from PyQt4 import QtCore
+
+
+class Startup(QtGui.QMainWindow):
+    
+    def __init__(self):
+        super(Startup, self).__init__()
+        
+        self.initUI()
+        
+    def initUI(self):               
+        self.setFixedSize(500, 300)
+        self.Buttons()
+        self.center()
+        self.setWindowTitle('Mechanics Collisions Test')    
+        self.show()
+        
+    def center(self):
+        
+        qr = self.frameGeometry()
+        cp = QtGui.QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
+
+    def closeEvent(self, event):
+        
+        reply = QtGui.QMessageBox.question(self, 'Message',
+            "Are you sure to quit?", QtGui.QMessageBox.Yes | 
+            QtGui.QMessageBox.No, QtGui.QMessageBox.No)
+
+        if reply == QtGui.QMessageBox.Yes:
+            event.accept()
+        else:
+            event.ignore()
+
+    def Close(self):
+        self.close()
+
+    def OpenMain(self):
+        ''
+
+    def OpenOptions(self):
+        ''
+
+    def Buttons(self):
+        y = 0
+        for i in (('Start',self.OpenMain),('Options',self.OpenOptions),('Quit',self.Close)):
+            qbtn = QtGui.QPushButton(i[0], self)
+            qbtn.clicked.connect(i[1])
+            qbtn.resize(100 ,50)
+            qbtn.move(200, 50 + y)
+            y = y + 75 
+
+
+
+def main():
+    
+    app = QtGui.QApplication(sys.argv)
+    ex = Startup()
+    sys.exit(app.exec_())
+
+
+if __name__ == '__main__':
+    main()    
