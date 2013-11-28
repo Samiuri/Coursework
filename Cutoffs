@@ -1,0 +1,19 @@
+    def statusBar(self):
+        exitAction = QtGui.QAction(QtGui.QIcon('Exit.png'), 'Exit', self)
+        exitAction.setShortcut('Ctrl+Q')
+        exitAction.triggered.connect(QtGui.QMainWindow.quit)
+        
+        self.toolbar = self.addToolBar('Exit')
+        self.toolbar.addAction(exitAction)
+
+     
+    def closeEvent(self):
+        
+        reply = QtGui.QMessageBox.question(self, 'Message',
+            "Are you sure to quit?", QtGui.QMessageBox.Yes | 
+            QtGui.QMessageBox.No, QtGui.QMessageBox.No)
+
+        if reply == QtGui.QMessageBox.Yes:
+            accept()
+        else:
+            ignore() 
