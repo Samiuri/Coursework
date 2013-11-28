@@ -1,0 +1,69 @@
+##Main window for startup of simulations
+import sys
+from PyQt4 import QtGui
+from PyQt4 import QtCore
+
+
+class Simulation(QtGui.QMainWindow):
+    
+    def __init__(self):
+        super(Simulation, self).__init__()
+        
+    def __init__(self):
+        super(Simulation, self).__init__()
+        
+        self.initUI()
+        
+    def initUI(self):
+        self.ToolbarButtons()
+        self.showFullScreen()
+        self.setWindowTitle('Simulation')    
+        self.show()
+    def ToolbarButtons(self):
+        self.toolbar = self.addToolBar('Controls')
+        for x in (exitaction, makeobject, reset, clear, play, , fastforward, slow, pause):
+            x = ''        
+        j = ((exitaction,'Exit','Exit','Ctrl+Q',sys.exit),
+            (makeobject,'Ball','Particle','Ctrl+A',self.initParticle),
+            (reset,'Refresh','Reset','Ctrl+R',self.resetTerrain),
+            (clear,'Bulldozer','Clear','Ctrl+W',self.clearTerrain),
+            (play,'Play','Play','Ctrl+Down',self.runsim),
+            (fastforward,'FFwd','FastForward','Ctrl+Right',self.FFwd),
+            (slow,'Slow','Slow','Ctrl+Left',self.Slow),
+            (pause,'Pause','Pause','Ctrl+Up',self.Pause),)
+        for (action,icon,name,shortcut,function) in j:
+                action = QtGui.QAction(QtGui.QIcon(icon), name, self)
+                action.setShortcut(shortcut)
+                action.triggered.connect(function)
+                self.toolbar.addAction(action)
+                
+    def initParticle():
+        pass
+        ##Update funtions included (Pygame)
+
+    def initTerrain():
+        pass
+        ##Create the object surface(Pygame)
+    def clearTerrain():
+        pass
+        ##Removes all particles and walls 
+    def resetTerrain():
+        pass
+    def runsim():
+        pass
+        ##Run simulation using all starting conditions
+    def FFwd():
+        pass
+    def Slow():
+        pass
+    def Pause():
+        pass
+def main():
+    
+    app = QtGui.QApplication(sys.argv)
+    ex = Simulation()
+    sys.exit(app.exec_())
+
+
+if __name__ == '__main__':
+    main()    
